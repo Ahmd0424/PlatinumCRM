@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLATINUM Call Log CRM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Redirect to login if not logged in -->
+  <script>
+    if (!localStorage.getItem("loggedInUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div id="sidebar">
+    <h2>Platinum CRM</h2>
+    <nav>
+      <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+      <button class="nav-btn" data-target="customers">Customers</button>
+      <button class="nav-btn" data-target="calls">Call Logs</button>
+    </nav>
+
+    <button id="logout-btn" class="btn-secondary logout-btn">Logout</button>
+    <footer>Powered By SHELBY</footer>
+  </div>
+
+  <main id="main">
+    <!-- Dashboard -->
+    <section id="dashboard" class="page active">
+      <h1>Dashboard</h1>
+      <div class="stats">
+        <div class="stat-card">
+          <div id="stat-customers" class="stat-num">0</div>
+          <div class="stat-label">Total Customers</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-calls" class="stat-num">0</div>
+          <div class="stat-label">Total Calls</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-visited" class="stat-num">0</div>
+          <div class="stat-label">Customers Visited</div>
+        </div>
+        <div class="stat-card">
+          <div id="stat-confirmed" class="stat-num">0</div>
+          <div class="stat-label">Customers Confirmed</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customers -->
+    <section id="customers" class="page">
+      <h1>Customers</h1>
+
+      <form id="customer-form">
+        <label for="cust-name">Name</label>
+        <input type="text" id="cust-name" required placeholder="Customer full name" />
+
+        <label for="cust-phone">Phone Number</label>
+        <input type="tel" id="cust-phone" required placeholder="+94XXXXXXXXX" pattern="^\+?\d{7,15}$" />
+
+        <label for="cust-location">Location</label>
+        <input type="text" id="cust-location" required placeholder="City or area" />
+
+        <label for="cust-country">Country</label>
+        <div class="dropdown-wrapper">
+          <select id="cust-country" required></select>
+          <button type="button" id="add-country-btn" class="small btn-secondary" title="Add new country">+</button>
+          <button type="button" id="del-country-btn" class="small delete" title="Delete selected country">🗑️</button>
+        </div>
+
+        <label for="cust-job">Job</label>
+        <div class="dropdown-wrapper">
+          <select id="cust-job" required></select>
+          <button type="button" id="add-job-btn" class="small btn-secondary" title="Add new job">+</button>
+          <button type="button" id="del-job-btn" class="small delete" title="Delete selected job">🗑️</button>
+        </div>
+
+        <button type="submit">Add Customer</button>
+      </form>
+
+      <table id="customers-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Location</th>
+            <th>Country</th>
+            <th>Job</th>
+            <th>Visited</th>
+            <th>Confirmed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Customer rows inserted here dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Call Logs -->
+    <section id="calls" class="page">
+      <h1>Call Logs</h1>
+
+      <form id="call-form">
+        <label for="call-customer">Customer</label>
+        <select id="call-customer" required></select>
+
+        <label for="call-date">Call Date</label>
+        <input type="date" id="call-date" required />
+
+        <label for="followup-date">Follow-up Date</label>
+        <input type="date" id="followup-date" />
+
+        <label for="call-desc">Description</label>
+        <textarea id="call-desc" placeholder="Details of the call..."></textarea>
+
+        <button type="submit">Add Call Log</button>
+      </form>
+
+      <table id="calls-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Job</th>
+            <th>Country</th>
+            <th>Call Date</th>
+            <th>Follow-up Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Call logs rows inserted here dynamically -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="scripts.js"></script>
+
+  <!-- Logout Script -->
+  <script>
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
