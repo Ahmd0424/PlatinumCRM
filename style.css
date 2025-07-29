@@ -316,3 +316,44 @@ td button {
     padding: 0.5rem;
   }
 }
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  background: none;
+  font-size: 1.8rem;
+  border: none;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: #34495e;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  body.sidebar-hidden #sidebar {
+    display: none;
+  }
+
+  body.sidebar-hidden #main {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  #sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #sidebar.show {
+    transform: translateX(0);
+  }
+}

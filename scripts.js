@@ -456,6 +456,26 @@ function updateDashboard() {
     customers.filter((c) => c.confirmed).length;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+  const navButtons = sidebar.querySelectorAll('nav button');
+
+  // Toggle sidebar on hamburger click
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('show');
+  });
+
+  // Close sidebar on nav click (mobile only)
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('show');
+      }
+    });
+  });
+});
+
 // Initial load
 refreshCustomersTable();
 refreshCallsTable();
